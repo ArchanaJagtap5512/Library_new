@@ -1,0 +1,55 @@
+
+<html>
+    <head>
+        <title>Library Page</title>
+    </head>
+    <style>
+          
+        .required:before {  
+          content:" *";
+          color: red;
+        }
+      </style>
+
+    <body>
+         
+        <h1>Library Application</h1>
+        <form action="{% url 'home_page' %}" method= "post">
+            {% csrf_token %}
+            {% if single_book %}
+            {% csrf_token %}
+                Id:- <input type="number" name="Book_id" value="{{single_book.id}}"><br><br>
+            {% endif %}
+            Name:- <input type="text" name="Book_name" value="{{single_book.name}}"><br><br>
+            Quantity:- <input type="number" name="Book_qty" value="{{single_book.qty}}"><br><br>
+            Price:- <input type="number" name="Book_price" value="{{single_book.price}}"><br><br>
+            Author:- <input type="text" name="Book_author" value="{{single_book.author}}"><br><br>
+
+            {% if single_book %}
+                {% if single_book.is_published == True %}
+                    Yes <input type="radio" name="book_is_published" value="Yes" checked>  No <input type="radio" name="book_is_published" value="No"><br><br>
+                {% else %}
+                    Yes <input type="radio" name="book_is_published" value="Yes">  No <input type="radio" name="book_is_published" value="No" checked><br><br>
+                {% endif %}
+            {% else %}
+                Yes <input type="radio" name="book_is_published" value="Yes">  No <input type="radio" name="book_is_published" value="No"><br><br>
+            {% endif %}
+
+
+            <input type="submit" class="btn btn-primary" value="submit"><br>
+
+            <a href = "{% url 'show_book' %}" class="btn btn-primary">show_book</a>
+
+            <a href="{% url 'all_inactive_books' %}">show inactive books</a>
+
+            <a href="{% url 'book_login' %}">Logout Page</a>
+
+            
+        </form>
+    </body>
+
+
+
+
+
+</html>
